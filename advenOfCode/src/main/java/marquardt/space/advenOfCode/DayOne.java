@@ -1,6 +1,5 @@
 package marquardt.space.advenOfCode;
 
-import java.nio.Buffer;
 import java.util.Scanner;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
@@ -9,7 +8,14 @@ import java.util.stream.Stream;
 
 public class DayOne {
 	
-	private static String current = "N";
+	enum Direction{
+		NORTH,
+		SOUTH,
+		EAST,
+		WEST
+	};
+	
+	private static Direction currentCirection = Direction.NORTH;
 	
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
@@ -27,30 +33,30 @@ public class DayOne {
 		int coordinate;
 		int[] buffer = new int[2];
 		coordinate=Integer.parseInt(s.substring(1));
-		if(s.charAt(0)=='R'&&current.equals("N")){
+		if(s.charAt(0)=='R'&&currentCirection==Direction.NORTH){
 			buffer[0]=coordinate;
-			current="E";
-		}else if(s.charAt(0)=='L'&&current.equals("N")){
+			changeCurrent(Direction.EAST);
+		}else if(s.charAt(0)=='L'&&currentCirection==Direction.NORTH){
 			buffer[0]=-coordinate;
-			current="W";
-		}else if(s.charAt(0)=='R'&&current.equals("S")){
+			changeCurrent(Direction.WEST);
+		}else if(s.charAt(0)=='R'&&currentCirection==Direction.SOUTH){
 			buffer[0]=-coordinate;
-			current="W";
-		}else if(s.charAt(0)=='L'&&current.equals("S")){
+			changeCurrent(Direction.WEST);
+		}else if(s.charAt(0)=='L'&&currentCirection==Direction.SOUTH){
 			buffer[0]=coordinate;
-			current="E";
-		}else if(s.charAt(0)=='R'&&current.equals("W")){
+			changeCurrent(Direction.EAST);
+		}else if(s.charAt(0)=='R'&&currentCirection==Direction.WEST){
 			buffer[1]=coordinate;
-			current="N";
-		}else if(s.charAt(0)=='L'&&current.equals("W")){
+			changeCurrent(Direction.NORTH);
+		}else if(s.charAt(0)=='L'&&currentCirection==Direction.WEST){
 			buffer[1]=-coordinate;
-			current="S";
-		}else if(s.charAt(0)=='R'&&current.equals("E")){
+			changeCurrent(Direction.SOUTH);
+		}else if(s.charAt(0)=='R'&&currentCirection==Direction.EAST){
 			buffer[1]=-coordinate;
-			current="S";
-		}else if(s.charAt(0)=='L'&&current.equals("E")){
+			changeCurrent(Direction.SOUTH);
+		}else if(s.charAt(0)=='L'&&currentCirection==Direction.EAST){
 			buffer[1]=coordinate;
-			current="N";
+			changeCurrent(Direction.NORTH);
 		}
 		return buffer;
 	};
@@ -71,6 +77,9 @@ public class DayOne {
 		
 	};
 	
+	private static void changeCurrent(Direction current) {
+		currentCirection=current;
+	}
 	
 
 }
