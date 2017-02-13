@@ -17,18 +17,14 @@ public class DayOne {
 	
 	private static Direction currentCirection = Direction.NORTH;
 	
-	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		System.out.println("Typ your input");
-		String input = in.nextLine();
-		in.close();
+	
+	
+	public static int getAnswer(String input) {
 		int[] buffer= Stream.of(input.split(", ")).map(s->s.trim()).reduce(new int[2],add,count);
-		System.out.println(buffer[0]+""+buffer[1]);
-		System.out.println(Math.abs(buffer[0])+Math.abs(buffer[1]));
-		
-		
-		
+		return Math.abs(buffer[0])+Math.abs(buffer[1]);
 	}
+	
+	
 	private static Function<String, int[]> getBlock = s->{
 		int coordinate;
 		int[] buffer = new int[2];
